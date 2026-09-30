@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f4ee">
+    <title>Quizzzzzzzz · Đăng nhập quản trị</title>
+    <style>
+      :root { color: #202b36; background: #f7f4ee; font-family: "Segoe UI", system-ui, sans-serif; }
+      * { box-sizing: border-box; }
+      body { min-height: 100dvh; display: grid; place-items: center; margin: 0; padding: 24px; background: radial-gradient(circle at 15% 10%, #fffdf8 0, transparent 34%), #f7f4ee; }
+      main { width: min(100%, 430px); padding: 32px; border: 1px solid #ddd2c4; border-radius: 18px; background: rgba(255,253,250,.94); box-shadow: 0 18px 50px rgba(58, 47, 35, .12); }
+      .eyebrow { margin: 0 0 10px; color: #a66324; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+      h1 { margin: 0 0 10px; font-size: 30px; letter-spacing: -.04em; }
+      p { color: #74808a; line-height: 1.55; }
+      form { display: grid; gap: 14px; margin-top: 24px; }
+      form[hidden] { display: none; }
+      label { display: grid; gap: 7px; color: #53616c; font-size: 13px; font-weight: 700; }
+      input { width: 100%; min-height: 48px; padding: 12px 13px; border: 1px solid #cfc6b8; border-radius: 10px; color: #202b36; background: #fff; font: inherit; outline: none; }
+      input:focus { border-color: #a66324; box-shadow: 0 0 0 3px rgba(166,99,36,.14); }
+      button { width: 100%; min-height: 48px; margin-top: 4px; padding: 12px 16px; border: 1px solid #a66324; border-radius: 10px; color: white; background: #a66324; font: inherit; font-weight: 700; cursor: pointer; transition: transform .18s ease, background-color .18s ease; }
+      button:active { transform: translateY(1px); background: #93591f; }
+      button:disabled { cursor: wait; opacity: .65; }
+      [data-status] { min-height: 22px; margin: 2px 0 0; font-size: 13px; }
+      [data-status][data-state="error"] { color: #aa3c31; }
+      @media (max-width: 760px) {
+        body { place-items: start center; padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+        main { width: 100%; margin: clamp(16px, 7vh, 42px) 0 24px; padding: clamp(22px, 6vw, 28px) clamp(18px, 5vw, 24px); border-radius: 16px; }
+        h1 { font-size: clamp(25px, 7vw, 30px); line-height: 1.08; }
+        form { gap: 12px; margin-top: 20px; }
+        label { gap: 6px; }
+        input, button { font-size: 16px; }
+        p { margin-top: 10px; }
+      }
+      @media (max-width: 380px) {
+        body { padding-inline: 12px; }
+        main { padding-inline: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">QUIZZZZZZZZ</p>
+      <h1>Đăng nhập quản trị</h1>
+      <p>Trang này chỉ dành cho người quản lý cấu hình voice, tài khoản ElevenLabs và thời lượng câu hỏi.</p>
+      <form data-login-form>
+        <label>Tên đăng nhập<input name="username" autocomplete="username" required autofocus></label>
+        <label>Mật khẩu<input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Đăng nhập</button>
+      </form>
+      <form data-change-form hidden>
+        <input type="hidden" name="username">
+        <label>Mật khẩu mới<input name="newPassword" type="password" autocomplete="new-password" required></label>
+        <label>Nhập lại mật khẩu mới<input name="confirmPassword" type="password" autocomplete="new-password" required></label>
+        <button type="submit">Lưu mật khẩu mới</button>
+      </form>
+      <p data-status aria-live="polite"></p>
+    </main>
+    <script>
+      const form = document.querySelector('[data-login-form]');
+      const changeForm = document.querySelector('[data-change-form]');
+      const status = document.querySelector('[data-status]');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const button = form.querySelector('button');
+        button.disabled = true;
+        status.textContent = 'Đang xác thực…';
+        status.dataset.state = '';
+        try {
+          const response = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify(Object.fromEntries(new FormData(form))),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Đăng nhập không thành công.');
+          if (result.mustChange) {
+            form.hidden = true;
+            changeForm.hidden = false;
+            changeForm.elements.username.value = result.username;
+            status.textContent = 'Đây là lần đăng nhập đầu tiên. Bạn phải đổi mật khẩu trước khi vào quản trị.';
+            button.disabled = false;
+            return;
+          }
+          window.location.replace('/admin');
+        } catch (error) {
+          status.textContent = error.message || 'Đăng nhập không thành công.';
+          status.dataset.state = 'error';
+          button.disabled = false;
+        }
+      });
+      changeForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const button = changeForm.querySelector('button');
+        const values = Object.fromEntries(new FormData(changeForm));
+        if (values.newPassword !== values.confirmPassword) {
+          status.textContent = 'Mật khẩu nhập lại không khớp.';
+          status.dataset.state = 'error';
+          return;
+        }
+        button.disabled = true;
+        status.textContent = 'Đang lưu mật khẩu mới…';
+        status.dataset.state = '';
+        try {
+          const response = await fetch('/api/admin/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ username: values.username, newPassword: values.newPassword }),
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Không đổi được mật khẩu.');
+          window.location.replace('/admin');
+        } catch (error) {
+          status.textContent = error.message || 'Không đổi được mật khẩu.';
+          status.dataset.state = 'error';
+          button.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

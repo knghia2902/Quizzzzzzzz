@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:scoring": "vitest run tests/scoring.test.js",
+    "test:questions": "vitest run tests/questions.test.js",
+    "test:backend": "vitest run tests/quiz-room.test.js tests/quiz-api.test.js",
+    "test:audio": "vitest run tests/client-events.test.js",
+    "test:full": "vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.2.7",
+    "vitest": "4.1.11",
+    "wrangler": "4.140.0"
+  }
+}

@@ -1,0 +1,11 @@
+name = "quiz-room-worker"
+main = "api.js"
+compatibility_date = "2024-09-22"
+
+[[durable_objects.bindings]]
+name = "QUIZ_ROOM"
+class_name = "QuizRoom"
+
+[exports.QuizRoom]
+type = "durable-object"
+storage = "sqlite"

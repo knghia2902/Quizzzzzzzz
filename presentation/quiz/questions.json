@@ -1,0 +1,204 @@
+{
+  "questions": [
+    {
+      "id": "q01",
+      "prompt": "Phủ định siêu hình là gì?",
+      "options": {
+        "A": "Loại bỏ sạch trơn, không kế thừa",
+        "B": "Loại bỏ có chọn lọc",
+        "C": "Giữ lại toàn bộ cái cũ",
+        "D": "Không liên quan đến phát triển"
+      }
+    },
+    {
+      "id": "q02",
+      "prompt": "Phủ định biện chứng khác phủ định siêu hình ở điểm nào?",
+      "options": {
+        "A": "Phủ định sạch trơn",
+        "B": "Vừa loại bỏ vừa kế thừa",
+        "C": "Không thay đổi gì",
+        "D": "Chỉ diễn ra trong tự nhiên"
+      }
+    },
+    {
+      "id": "q03",
+      "prompt": "Tính khách quan của phủ định biện chứng là gì?",
+      "options": {
+        "A": "Do con người áp đặt",
+        "B": "Do mâu thuẫn nội tại của sự vật",
+        "C": "Do xã hội quyết định",
+        "D": "Do ý chí chủ quan"
+      }
+    },
+    {
+      "id": "q04",
+      "prompt": "Tính kế thừa của phủ định biện chứng thể hiện thế nào?",
+      "options": {
+        "A": "Giữ lại toàn bộ cái cũ",
+        "B": "Loại bỏ tất cả cái cũ",
+        "C": "Giữ lại yếu tố tích cực, cải tạo phù hợp",
+        "D": "Không giữ lại gì"
+      }
+    },
+    {
+      "id": "q05",
+      "prompt": "Ví dụ khoa học nào thể hiện phủ định biện chứng?",
+      "options": {
+        "A": "Thuyết Darwin phủ định thuyết tiến hóa",
+        "B": "Thuyết tương đối phủ định thuyết Newton",
+        "C": "Thuyết Big Bang phủ định thuyết Trái đất phẳng",
+        "D": "Thuyết lượng tử phủ định thuyết Einstein"
+      }
+    },
+    {
+      "id": "q06",
+      "prompt": "Trong văn hóa, chữ Quốc ngữ phủ định chữ Nôm theo cách nào?",
+      "options": {
+        "A": "Loại bỏ hoàn toàn ngôn ngữ Việt",
+        "B": "Giữ lại tinh hoa ngôn ngữ Việt, dễ học hơn",
+        "C": "Không liên quan đến chữ Nôm",
+        "D": "Chỉ dùng trong văn bản hành chính"
+      }
+    },
+    {
+      "id": "q07",
+      "prompt": "Phủ định biện chứng có tính phổ biến nghĩa là gì?",
+      "options": {
+        "A": "Chỉ diễn ra trong xã hội",
+        "B": "Chỉ diễn ra trong tự nhiên",
+        "C": "Diễn ra trong tự nhiên, xã hội và tư duy",
+        "D": "Chỉ diễn ra trong tư duy"
+      }
+    },
+    {
+      "id": "q08",
+      "prompt": "Quy luật phủ định của phủ định chỉ ra khuynh hướng phát triển như thế nào?",
+      "options": {
+        "A": "Đi xuống",
+        "B": "Đi lên theo đường xoáy ốc",
+        "C": "Đi ngang",
+        "D": "Không thay đổi"
+      }
+    },
+    {
+      "id": "q09",
+      "prompt": "Một chu kỳ phủ định của phủ định cần ít nhất bao nhiêu lần phủ định?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      }
+    },
+    {
+      "id": "q10",
+      "prompt": "Ví dụ tự nhiên nào minh họa phủ định của phủ định?",
+      "options": {
+        "A": "Nước → hơi nước → mây",
+        "B": "Hạt giống → cây → quả → hạt giống mới",
+        "C": "Đá → cát → xi măng",
+        "D": "Mặt trời → ánh sáng → bóng tối"
+      }
+    },
+    {
+      "id": "q11",
+      "prompt": "Ví dụ xã hội nào minh họa phủ định của phủ định?",
+      "options": {
+        "A": "Nô lệ → phong kiến → tư bản → xã hội mới",
+        "B": "Tư bản → phong kiến → nô lệ",
+        "C": "Xã hội nguyên thủy → tư bản → phong kiến",
+        "D": "Tư bản → xã hội nguyên thủy → phong kiến"
+      }
+    },
+    {
+      "id": "q12",
+      "prompt": "Ví dụ trong công nghệ thể hiện phủ định của phủ định?",
+      "options": {
+        "A": "Máy ảnh phim → máy ảnh kỹ thuật số → smartphone",
+        "B": "Xe ngựa → xe hơi → xe ngựa",
+        "C": "Máy tính → bàn tính → smartphone",
+        "D": "Điện thoại bàn → máy fax → điện thoại bàn"
+      }
+    },
+    {
+      "id": "q13",
+      "prompt": "Quá trình học tập có phải là phủ định của phủ định không?",
+      "options": {
+        "A": "Có, vì kiến thức cũ được nâng cao",
+        "B": "Không, vì kiến thức cũ mất đi",
+        "C": "Có, vì kiến thức cũ bị loại bỏ sạch trơn",
+        "D": "Không, vì học tập không liên quan phủ định"
+      }
+    },
+    {
+      "id": "q14",
+      "prompt": "Đường xoáy ốc trong phủ định của phủ định có ý nghĩa gì?",
+      "options": {
+        "A": "Phát triển lặp lại nhưng nâng cao",
+        "B": "Phát triển đi xuống",
+        "C": "Phát triển vòng tròn không thay đổi",
+        "D": "Phát triển ngẫu nhiên"
+      }
+    },
+    {
+      "id": "q15",
+      "prompt": "Theo Lênin, sự phát triển diễn ra theo hình thức nào?",
+      "options": {
+        "A": "Đường thẳng",
+        "B": "Đường tròn",
+        "C": "Đường trôn ốc",
+        "D": "Đường gấp khúc"
+      }
+    },
+    {
+      "id": "q16",
+      "prompt": "Ý nghĩa lớn nhất của quy luật phủ định của phủ định là gì?",
+      "options": {
+        "A": "Chỉ ra khuynh hướng đi xuống",
+        "B": "Chỉ ra khuynh hướng tiến lên, vừa kế thừa vừa đổi mới",
+        "C": "Chỉ ra sự lặp lại vòng tròn",
+        "D": "Chỉ ra sự mất đi hoàn toàn cái cũ"
+      }
+    },
+    {
+      "id": "q17",
+      "prompt": "Quy luật này giúp ta nhận thức thế nào về sự phát triển?",
+      "options": {
+        "A": "Phát triển thẳng tắp, không có bước lùi",
+        "B": "Phát triển quanh co, phức tạp, nhưng tiến bộ",
+        "C": "Phát triển đi xuống",
+        "D": "Phát triển ngẫu nhiên"
+      }
+    },
+    {
+      "id": "q18",
+      "prompt": "Trong học tập, phủ định của phủ định được vận dụng như thế nào?",
+      "options": {
+        "A": "Loại bỏ toàn bộ kiến thức cũ",
+        "B": "Kế thừa kiến thức cũ, đổi mới phương pháp học",
+        "C": "Không cần kiến thức cũ",
+        "D": "Chỉ học lại kiến thức cũ"
+      }
+    },
+    {
+      "id": "q19",
+      "prompt": "Trong đổi mới xã hội, cần kế thừa những yếu tố nào của cái cũ?",
+      "options": {
+        "A": "Tư tưởng bảo thủ",
+        "B": "Giá trị văn hóa, đạo đức, truyền thống tốt đẹp",
+        "C": "Thói quen lỗi thời",
+        "D": "Những yếu tố lạc hậu"
+      }
+    },
+    {
+      "id": "q20",
+      "prompt": "Tại sao không thể phủ định sạch trơn quá khứ?",
+      "options": {
+        "A": "Vì cái mới luôn hình thành trên nền tảng cái cũ",
+        "B": "Vì cái mới không cần cái cũ",
+        "C": "Vì cái cũ không có giá trị",
+        "D": "Vì phủ định sạch trơn là tốt nhất"
+      }
+    }
+  ]
+}

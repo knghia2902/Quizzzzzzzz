@@ -1,0 +1,5 @@
+git+https://github.com/nguyenvulebinh/VietVoice-TTS.git
+onnxruntime-gpu>=1.15.0
+omnivoice
+requests>=2.31.0
+playwright>=1.40.0

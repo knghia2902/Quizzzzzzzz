@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f7f4ee">
+    <title>Quizzzzzzzz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/presentation/quiz/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css?v=mobile-room-order-20260930-3">
+    <script type="module" src="app.js?v=question-duration-settings-20260930-1"></script>
+  </head>
+  <body>
+    <div class="quiz-shell" data-role="quiz-shell" data-state="entry">
+      <header class="site-header" data-role="site-header">
+        <a class="wordmark" href="/" aria-label="Trang chủ Quizzzzzzzz">Quizzzzzzzz</a>
+        <div class="header-actions">
+          <span class="role-badge" data-role="role-badge" hidden></span>
+        </div>
+      </header>
+
+      <div class="status-band" data-role="status-band" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span><span data-role="connection-status">Đang kết nối</span>
+      </div>
+      <div class="pause-banner" data-role="pause-banner" role="alert" hidden>
+        <strong>Phòng đang tạm dừng</strong>
+        <span data-role="pause-copy">Chủ phòng đã mất kết nối. Timer sẽ tiếp tục khi chủ phòng quay lại.</span>
+      </div>
+
+      <main class="page-main" data-role="main-content">
+        <section class="screen entry-screen" data-screen="entry" aria-labelledby="entry-heading">
+          <div class="hero-copy">
+            <p class="eyebrow">Quiz theo phòng</p>
+            <h1 id="entry-heading">Sẵn sàng thử sức?</h1>
+            <p class="lede">Chọn vai trò để bắt đầu <span class="lede-brand">Quizzzzzzzz bằng tiếng Việt.</span></p>
+          </div>
+          <div class="entry-visual" aria-hidden="true">
+            <div class="visual-topline"><span>PHỦ ĐỊNH / 01</span><span>LIVE</span></div>
+            <div class="visual-number">20</div>
+            <div class="visual-label">câu hỏi để mở khóa mạch tư duy</div>
+            <div class="visual-rule"></div>
+            <div class="visual-bottomline"><span data-role="entry-duration-label">ĐANG TẢI THỜI LƯỢNG</span><span>1000 ĐIỂM</span></div>
+          </div>
+          <div class="entry-stats" aria-label="Thông tin ván chơi">
+            <div><strong>20</strong><span>câu hỏi</span></div>
+            <div><strong data-role="entry-duration-value">--</strong><span>mỗi câu</span></div>
+            <div><strong>1K</strong><span>điểm tối đa</span></div>
+          </div>
+          <div class="entry-actions" aria-label="Chọn vai trò">
+            <button class="primary-button" type="button" data-action="show-create">Tạo phòng</button>
+            <button class="secondary-button" type="button" data-action="show-join">Tham gia phòng</button>
+          </div>
+          <section class="history-panel" data-role="history-panel" aria-labelledby="history-heading">
+            <div class="panel-title-row">
+              <div><p class="eyebrow">LƯU TRÊN MÁY CHỦ LOCAL</p><h2 id="history-heading">Lịch sử ván chơi</h2></div>
+              <button class="text-button" type="button" data-action="refresh-history">Làm mới</button>
+            </div>
+            <ol class="history-list" data-role="history-list"></ol>
+            <p class="empty-state" data-role="history-empty">Chưa có ván chơi nào được lưu.</p>
+            <p class="history-error" data-role="history-error" hidden>Không tải được lịch sử. Ván mới vẫn chơi bình thường.</p>
+          </section>
+        </section>
+
+        <section class="screen form-screen" data-screen="create" aria-labelledby="create-heading" hidden>
+          <div class="section-heading"><p class="eyebrow">Chủ phòng</p><h1 id="create-heading">Tạo phòng chơi</h1></div>
+          <form class="quiz-form" data-form="create">
+            <label for="host-nickname">Biệt danh</label>
+            <input id="host-nickname" name="nickname" maxlength="32" autocomplete="nickname" required aria-describedby="host-nickname-help host-nickname-error">
+            <p id="host-nickname-help" class="helper">Tên này sẽ hiển thị với cả phòng.</p>
+            <p id="host-nickname-error" class="field-error" data-role="host-nickname-error" role="alert" hidden></p>
+            <button class="primary-button" type="submit">Tạo phòng</button>
+            <button class="text-button" type="button" data-action="back-entry">Quay lại</button>
+          </form>
+        </section>
+
+        <section class="screen form-screen" data-screen="join" aria-labelledby="join-heading" hidden>
+          <div class="section-heading"><p class="eyebrow">Người chơi</p><h1 id="join-heading">Tham gia phòng</h1></div>
+          <form class="quiz-form" data-form="join">
+            <label for="room-code">Mã phòng</label>
+            <input id="room-code" name="roomCode" inputmode="text" maxlength="6" autocomplete="one-time-code" required aria-describedby="room-code-help room-code-error">
+            <p id="room-code-help" class="helper">Nhập 6 ký tự do chủ phòng chia sẻ.</p>
+            <p id="room-code-error" class="field-error" data-role="room-code-error" role="alert" hidden></p>
+            <label for="player-nickname">Biệt danh</label>
+            <input id="player-nickname" name="nickname" maxlength="32" autocomplete="nickname" required aria-describedby="player-nickname-help player-nickname-error">
+            <p id="player-nickname-help" class="helper">Không cần tài khoản. Nếu trùng tên, hệ thống sẽ thêm hậu tố tự động.</p>
+            <p id="player-nickname-error" class="field-error" data-role="player-nickname-error" role="alert" hidden></p>
+            <button class="primary-button" type="submit">Vào phòng</button>
+            <button class="text-button" type="button" data-action="back-entry">Quay lại</button>
+          </form>
+        </section>
+
+        <section class="screen room-screen" data-screen="room" aria-labelledby="room-heading" hidden>
+          <div class="room-layout">
+            <div class="room-heading-row">
+              <div><p class="eyebrow" data-role="phase-label">Quiz</p><h1 id="room-heading" data-role="room-heading">Quizzzzzzzz</h1></div>
+            </div>
+            <div class="room-stage">
+              <section class="room-panel lobby-panel" data-role="host-lobby" aria-labelledby="host-lobby-heading" hidden>
+                <h2 id="host-lobby-heading">Phòng đang chờ người chơi</h2>
+                <p>Gửi mã phòng cho cả lớp. Khi có người tham gia, họ sẽ xuất hiện ở đây.</p>
+                <p class="participant-count"><strong data-role="participant-count">0</strong> người chơi</p>
+                <ul class="participant-list" data-role="participant-list"></ul>
+                <div class="host-actions">
+                  <label class="switch-row"><span>Tự chuyển câu</span><input type="checkbox" data-action="toggle-auto"><span class="switch" aria-hidden="true"></span></label>
+                  <button class="primary-button" type="button" data-action="start-quiz">Bắt đầu ván chơi</button>
+                </div>
+              </section>
+              <section class="room-panel lobby-panel" data-role="player-lobby" aria-labelledby="player-lobby-heading" hidden>
+                <h2 id="player-lobby-heading">Đã vào phòng</h2>
+                <p>Chờ chủ phòng bắt đầu ván chơi. Bạn không cần tải lại trang.</p>
+                <p class="participant-count"><strong data-role="participant-count-player">0</strong> người chơi đang chờ</p>
+                <p class="helper">Bạn đang tham gia với tên <strong data-role="player-name"></strong>.</p>
+              </section>
+
+              <section class="question-panel" data-role="question-panel" hidden aria-labelledby="question-heading">
+                <div class="question-meta"><span data-role="question-progress">Câu 1/20</span><span class="answer-count" data-role="answer-count"></span></div>
+                <div class="timer" data-role="timer" data-state="normal" role="timer" aria-label="Đang tải thời lượng"><span data-role="timer-value">--</span><span class="timer-unit">giây</span></div>
+                <div class="timer-track" aria-hidden="true"><span data-role="timer-progress"></span></div>
+                <h2 id="question-heading" data-role="question-heading" tabindex="-1"></h2>
+                <div class="answer-grid" data-role="host-answers" aria-label="Các đáp án để xem trước"></div>
+                <div class="answer-grid player-answer-grid" data-role="player-answers" aria-label="Chọn một đáp án">
+                  <button class="answer-option" type="button" data-answer="A"><span class="answer-letter">A</span><span data-answer-text="A"></span></button>
+                  <button class="answer-option" type="button" data-answer="B"><span class="answer-letter">B</span><span data-answer-text="B"></span></button>
+                  <button class="answer-option" type="button" data-answer="C"><span class="answer-letter">C</span><span data-answer-text="C"></span></button>
+                  <button class="answer-option" type="button" data-answer="D"><span class="answer-letter">D</span><span data-answer-text="D"></span></button>
+                </div>
+                <p class="helper shortcut-help" data-role="shortcut-help">Mẹo: nhấn A–D hoặc 1–4 để chọn nhanh.</p>
+                <p class="answer-status" data-role="answer-status" role="status" aria-live="polite"></p>
+              </section>
+
+              <section class="reveal-panel room-panel" data-role="reveal-panel" aria-labelledby="reveal-heading" hidden>
+                <h2 id="reveal-heading">Đáp án và giải thích</h2>
+                <p class="result-message" data-role="result-message"></p>
+                <p class="correct-answer" data-role="correct-answer"></p>
+                <p class="explanation" data-role="explanation"></p>
+                <p class="announcement" data-role="announcement" aria-live="polite"></p>
+              </section>
+
+              <section class="paused-panel" data-role="paused-panel" hidden>
+                <strong>Phòng đang tạm dừng</strong><span>Chủ phòng đã mất kết nối. Timer sẽ tiếp tục khi chủ phòng quay lại.</span>
+              </section>
+
+              <section class="finished-panel room-panel" data-role="finished-panel" aria-labelledby="finished-heading" hidden>
+                <p class="eyebrow">Đã hoàn thành</p><h2 id="finished-heading">Kết quả ván chơi</h2>
+                <div class="final-score"><span>Điểm của bạn</span><strong data-role="final-score">0</strong><span data-role="final-rank"></span></div>
+                <section class="final-leaderboard-block" aria-labelledby="final-top10-heading">
+                  <div class="panel-title-row"><h3 id="final-top10-heading">Top 10 người chiến thắng</h3><span data-role="final-top10-count"></span></div>
+                  <ol class="leaderboard-list" data-role="final-top10-list"></ol>
+                  <p class="empty-state" data-role="final-top10-empty">Chưa có kết quả.</p>
+                </section>
+                <p class="announcement" data-role="final-announcement" aria-live="polite" hidden></p>
+                <button class="primary-button" type="button" data-action="new-room">Tạo phòng mới</button>
+              </section>
+            </div>
+
+            <aside class="side-rail" aria-label="Điều khiển và bảng xếp hạng">
+              <section class="host-rail room-panel" data-role="host-rail" hidden>
+                <div class="room-code-block" data-role="room-code-block">
+                  <span class="label">Mã phòng</span>
+                  <div class="room-code-line">
+                    <strong class="room-code" data-role="room-code" tabindex="0"></strong>
+                    <div class="room-code-icon-actions">
+                      <button class="room-code-icon-button" type="button" data-action="copy-code" aria-label="Sao chép mã phòng" title="Sao chép mã phòng">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+                      </button>
+                      <button class="room-code-icon-button" type="button" data-action="share-room" aria-label="Chia sẻ phòng" title="Chia sẻ phòng">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"></path></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <span class="feedback" data-role="copy-feedback" aria-live="polite"></span>
+                </div>
+                <div class="host-control-block" data-role="host-controls">
+                  <div class="host-control-heading">
+                    <h2>Bảng điều khiển</h2>
+                  </div>
+                  <div class="host-control-actions">
+                    <button class="secondary-button" type="button" data-action="next-question">Câu tiếp theo</button>
+                    <button class="danger-button" type="button" data-action="finish-quiz">Kết thúc</button>
+                  </div>
+                </div>
+              </section>
+              <section class="leaderboard-panel room-panel" data-role="room-leaderboard" aria-labelledby="room-leaderboard-heading">
+                <div class="panel-title-row"><h2 id="room-leaderboard-heading">Bảng xếp hạng</h2><span data-role="leaderboard-count"></span></div>
+                <ol class="leaderboard-list" data-role="leaderboard-list"></ol>
+                <p class="empty-state" data-role="room-leaderboard-empty">Chưa có điểm trong phòng.</p>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="screen error-screen" data-screen="error" aria-labelledby="error-heading" hidden>
+          <p class="eyebrow">Có lỗi kết nối</p><h1 id="error-heading">Chưa thể kết nối lại.</h1>
+          <p data-role="error-message">Kiểm tra mạng rồi thử lại.</p>
+          <button class="primary-button" type="button" data-action="retry">Thử lại</button>
+          <button class="text-button" type="button" data-action="back-entry">Về trang đầu</button>
+        </section>
+      </main>
+
+      <footer class="site-footer"><p data-role="announcement-footer" aria-live="polite">Bạn sẽ luôn thấy thông báo bằng chữ khi âm thanh bị tắt.</p></footer>
+    </div>
+
+    <dialog class="confirm-dialog" data-role="confirm-dialog" aria-labelledby="confirm-heading">
+      <form method="dialog" class="dialog-card" data-role="confirm-form">
+        <h2 id="confirm-heading">Kết thúc ván chơi?</h2>
+        <p data-role="confirm-copy">Kết thúc ván chơi? Người chơi sẽ không thể trả lời các câu còn lại.</p>
+        <div class="dialog-actions"><button class="secondary-button" type="button" data-action="cancel-confirm">Tiếp tục chơi</button><button class="danger-button" type="button" data-action="confirm-finish">Kết thúc ván chơi</button></div>
+      </form>
+    </dialog>
+    <dialog class="history-dialog" data-role="history-dialog" aria-labelledby="history-dialog-heading">
+      <div class="dialog-card">
+        <div class="panel-title-row history-dialog-heading-row">
+          <div><p class="eyebrow">Bảng xếp hạng đã lưu</p><h2 id="history-dialog-heading" data-role="history-dialog-heading">Lịch sử ván chơi</h2></div>
+          <button class="text-button" type="button" data-action="close-history">Đóng</button>
+        </div>
+        <p class="history-dialog-meta" data-role="history-dialog-meta"></p>
+        <ol class="leaderboard-list history-dialog-list" data-role="history-dialog-list"></ol>
+        <p class="empty-state" data-role="history-dialog-empty" hidden>Chưa có bảng xếp hạng.</p>
+      </div>
+    </dialog>
+  </body>
+</html>

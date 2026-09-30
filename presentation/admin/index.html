@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f4ee">
+    <title>Quizzzzzzzz · Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/presentation/admin/style.css?v=voice-language-audit-20260930-1">
+    <script type="module" src="/presentation/admin/app.js?v=voice-language-audit-20260930-1"></script>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <header class="admin-header">
+        <div>
+          <p class="eyebrow">QUIZZZZZZZZ</p>
+          <h1>Quản trị voice</h1>
+          <p class="lede">Chọn và thử từng model clone giọng đang chạy trên máy chủ local.</p>
+        </div>
+        <div class="admin-header-actions"><a class="back-link" href="/">← Về Quiz</a><button class="text-button" type="button" data-action="logout">Đăng xuất</button></div>
+      </header>
+
+      <p class="status-line" data-role="status" role="status" aria-live="polite">Đang đọc cấu hình…</p>
+
+      <section class="settings-layout" data-role="settings" hidden>
+        <form id="settings-form" class="settings-card" data-role="settings-form">
+          <div class="card-heading"><div><h2>Cấu hình clone giọng</h2></div></div>
+          <div class="field-grid">
+            <div class="engine-select" data-role="engine-select">
+              <select class="engine-native-select" name="engine" aria-hidden="true" tabindex="-1"><option value="vietvoice">VietVoice</option><option value="omnivoice">OmniVoice</option><option value="elevenlabs">ElevenLabs</option></select>
+              <button class="engine-select-trigger" type="button" data-role="engine-select-trigger" aria-label="Bộ máy voice" aria-haspopup="listbox" aria-expanded="false" aria-controls="engine-select-menu">ElevenLabs</button>
+              <div class="engine-select-menu" id="engine-select-menu" data-role="engine-select-menu" role="listbox" aria-label="Bộ máy voice" hidden>
+                <button class="engine-select-option" type="button" role="option" data-engine-option="vietvoice" aria-selected="false">VietVoice</button>
+                <button class="engine-select-option" type="button" role="option" data-engine-option="omnivoice" aria-selected="false">OmniVoice</button>
+                <button class="engine-select-option" type="button" role="option" data-engine-option="elevenlabs" aria-selected="false">ElevenLabs</button>
+              </div>
+            </div>
+          </div>
+          <fieldset class="engine-options" data-engine-settings="clone">
+            <legend>Clone local</legend>
+            <div class="field-grid">
+              <label>Speed<input name="clone_speed" type="number" min="0.8" max="1.5" step="0.05"></label>
+              <label>NFE step<input name="nfe_step" type="number" min="8" max="64" step="1"></label>
+              <label>Max chunk duration (giây)<input name="max_chunk_duration" type="number" min="5" max="30" step="0.5"></label>
+              <label>File mẫu clone<input name="reference_audio" type="text"></label>
+            </div>
+            <label>Nội dung đúng với file mẫu<input name="reference_text" type="text" maxlength="500"></label>
+            <p class="hint">Dùng cho VietVoice-TTS và OmniVoice Vietnamese.</p>
+          </fieldset>
+          <fieldset class="engine-options" data-engine-settings="elevenlabs" hidden>
+            <legend>ElevenLabs Web API tool</legend>
+            <p class="hint">ElevenLabs Web API Proxy đã tích hợp trực tiếp vào service Quiz. Nút quét chỉ đọc session Chrome/Edge trên máy đang chạy Quiz.</p>
+            <div class="field-grid">
+              <label>Speed<input name="speed" type="number" min="0.8" max="1.5" step="0.05"></label>
+              <label>Giọng đọc
+                <div class="settings-select" data-role="voice-select">
+                  <select class="settings-native-select" name="elevenlabs_voice_id" aria-hidden="true" tabindex="-1">
+                    <option value="6adFm46eyy74snVn6YrT">Giọng đang dùng</option>
+                    <option value="21m00Tcm4TlvDq8ikWAM">Rachel</option>
+                    <option value="pNInz6obpgDQGcFmaJgB">Adam</option>
+                    <option value="TxGEqnHWrfWFTfGW9XjX">Josh</option>
+                    <option value="EXAVITQu4vr4xnSDxMaL">Bella</option>
+                    <option value="yoZ06aMxZJJ28mfd3POQ">Sam</option>
+                  </select>
+                  <button class="settings-select-trigger" type="button" data-role="voice-select-trigger" aria-label="Giọng đọc" aria-haspopup="listbox" aria-expanded="false">Giọng đang dùng</button>
+                  <div class="settings-select-menu" data-role="voice-select-menu" role="listbox" aria-label="Giọng đọc" hidden>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="6adFm46eyy74snVn6YrT">Giọng đang dùng</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="21m00Tcm4TlvDq8ikWAM">Rachel</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="pNInz6obpgDQGcFmaJgB">Adam</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="TxGEqnHWrfWFTfGW9XjX">Josh</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="EXAVITQu4vr4xnSDxMaL">Bella</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="voice" data-value="yoZ06aMxZJJ28mfd3POQ">Sam</button>
+                  </div>
+                </div>
+              </label>
+              <label>Mô hình
+                <div class="settings-select" data-role="model-select">
+                  <select class="settings-native-select" name="elevenlabs_model_id" aria-hidden="true" tabindex="-1">
+                    <option value="eleven_v3">Eleven v3</option>
+                    <option value="eleven_v3_conversational">Eleven v3 Conversational</option>
+                    <option value="eleven_multilingual_v2">Eleven Multilingual v2</option>
+                    <option value="eleven_flash_v2_5">Eleven Flash v2.5</option>
+                    <option value="eleven_turbo_v2_5">Eleven Turbo v2.5</option>
+                  </select>
+                  <button class="settings-select-trigger" type="button" data-role="model-select-trigger" aria-label="Mô hình" aria-haspopup="listbox" aria-expanded="false">Eleven v3</button>
+                  <div class="settings-select-menu" data-role="model-select-menu" role="listbox" aria-label="Mô hình" hidden>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="model" data-value="eleven_v3">Eleven v3</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="model" data-value="eleven_v3_conversational">Eleven v3 Conversational</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="model" data-value="eleven_multilingual_v2">Eleven Multilingual v2</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="model" data-value="eleven_flash_v2_5">Eleven Flash v2.5</button>
+                    <button class="settings-select-option" type="button" role="option" data-settings-option="model" data-value="eleven_turbo_v2_5">Eleven Turbo v2.5</button>
+                  </div>
+                </div>
+              </label>
+              <label>Ngôn ngữ
+                <select name="elevenlabs_language_code" aria-label="Ngôn ngữ ElevenLabs">
+                  <option value="vi">Tiếng Việt</option>
+                  <option value="auto">Tự động theo nội dung</option>
+                  <option value="en">English</option>
+                  <option value="zh">中文</option>
+                  <option value="ja">日本語</option>
+                  <option value="ko">한국어</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="de">Deutsch</option>
+                </select>
+              </label>
+              <label>Stability<input name="elevenlabs_stability" type="number" min="0" max="1" step="0.05"></label>
+              <label>Similarity boost<input name="elevenlabs_similarity_boost" type="number" min="0" max="1" step="0.05"></label>
+            </div>
+            <section class="elevenlabs-status-card" data-role="elevenlabs-status-card" hidden>
+              <div class="elevenlabs-status-heading">
+                <h2>Trạng thái tài khoản</h2>
+                <div class="elevenlabs-status-actions">
+                  <button class="secondary-button" type="button" data-action="add-elevenlabs">Thêm tài khoản</button>
+                  <button class="secondary-button" type="button" data-action="refresh-elevenlabs" title="Quét session ElevenLabs trên máy đang chạy Quiz">Quét máy này</button>
+                </div>
+                <span class="service-pill" data-role="elevenlabs-status-pill" hidden>ĐANG KIỂM TRA</span>
+              </div>
+              <div class="elevenlabs-status-meta">
+                <div class="elevenlabs-credit-line">
+                  <p class="muted" data-role="elevenlabs-status-message">Đang kiểm tra session và credit…</p>
+                </div>
+                <p class="hint elevenlabs-credit-hint">Voice động chỉ tạo khi có người trả lời đúng nhanh nhất. Phần cuối ván không tạo voice đọc tên 10 người thắng.</p>
+                <label class="dynamic-voice-toggle"><input name="dynamic_voice_enabled" type="checkbox"><span>Cho phép voice động trong ván chơi (trừ credit khi có người thắng)</span></label>
+                <p class="elevenlabs-account-error" data-role="elevenlabs-account-error" hidden></p>
+              </div>
+              <ul class="elevenlabs-account-list" data-role="elevenlabs-account-list"></ul>
+            </section>
+          </fieldset>
+          <div class="form-actions"><button class="primary-button" type="submit">Lưu cấu hình</button><button class="secondary-button" type="button" data-action="reload">Tải lại</button></div>
+        </form>
+
+        <div class="admin-side-stack">
+          <form class="preview-card" data-role="preview-form">
+            <h2>Nghe thử voice</h2>
+            <p class="muted">Dùng để kiểm tra speed và file mẫu trước khi đưa câu động vào ván chơi.</p>
+            <textarea id="preview-text" name="text" aria-label="Văn bản voice" rows="5">Chúc mừng Nguyễn An đã trả lời đúng và nhanh nhất!</textarea>
+            <button class="secondary-button full-button" type="submit">Tạo audio thử</button>
+            <audio data-role="preview-audio" controls preload="none" hidden></audio>
+          </form>
+          <section class="quiz-settings-card settings-card" data-role="quiz-settings" hidden>
+            <div>
+              <h2>Thời lượng mỗi câu</h2>
+              <p class="muted">Cấu hình thời gian người chơi được phép trả lời.</p>
+            </div>
+            <form data-role="quiz-settings-form">
+              <label>Thời lượng (giây)<input name="questionDurationSec" type="number" min="5" max="300" step="1" required></label>
+              <button class="primary-button" type="submit">Lưu thời lượng</button>
+            </form>
+          </section>
+        </div>
+        <fieldset class="volume-settings">
+          <legend>Âm lượng phát</legend>
+          <p class="hint">Chỉnh theo phần trăm. Thay đổi được áp dụng ngay cho phòng mở mới và lần phát tiếp theo.</p>
+          <div class="volume-grid">
+            <label><span class="volume-label"><span>Tổng âm lượng</span><output data-volume-output="master">100%</output></span><input form="settings-form" data-volume-input="master" name="audio_master" type="range" min="0" max="100" step="1" value="100"></label>
+            <label><span class="volume-label"><span>Nhạc nền</span><output data-volume-output="music">16%</output></span><input form="settings-form" data-volume-input="music" name="audio_music" type="range" min="0" max="100" step="1" value="16"></label>
+            <label><span class="volume-label"><span>Trả lời đúng</span><output data-volume-output="correct">45%</output></span><input form="settings-form" data-volume-input="correct" name="audio_correct" type="range" min="0" max="100" step="1" value="45"></label>
+            <label><span class="volume-label"><span>Trả lời sai</span><output data-volume-output="incorrect">45%</output></span><input form="settings-form" data-volume-input="incorrect" name="audio_incorrect" type="range" min="0" max="100" step="1" value="45"></label>
+            <label><span class="volume-label"><span>Chào mừng</span><output data-volume-output="welcome">80%</output></span><input form="settings-form" data-volume-input="welcome" name="audio_welcome" type="range" min="0" max="100" step="1" value="80"></label>
+            <label><span class="volume-label"><span>Phòng sẵn sàng</span><output data-volume-output="roomReady">80%</output></span><input form="settings-form" data-volume-input="roomReady" name="audio_roomReady" type="range" min="0" max="100" step="1" value="80"></label>
+            <label><span class="volume-label"><span>Kết quả cuối</span><output data-volume-output="finalResults">80%</output></span><input form="settings-form" data-volume-input="finalResults" name="audio_finalResults" type="range" min="0" max="100" step="1" value="80"></label>
+            <label><span class="volume-label"><span>Voice động</span><output data-volume-output="dynamicVoice">80%</output></span><input form="settings-form" data-volume-input="dynamicVoice" name="audio_dynamicVoice" type="range" min="0" max="100" step="1" value="80"></label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="question-set-manager settings-card" data-role="question-sets" hidden>
+        <div class="card-heading">
+          <div><h2>Bộ câu hỏi</h2><p class="muted">Mỗi ván sẽ lấy ngẫu nhiên 20 câu từ bộ đang được chọn.</p></div>
+        </div>
+        <div class="question-set-selection">
+          <div class="question-set-picker" data-role="question-set-picker">
+            <select class="question-set-native-select" data-role="active-question-set" aria-hidden="true" tabindex="-1"></select>
+            <button class="question-set-picker-trigger" type="button" data-role="question-set-picker-trigger" aria-label="Bộ câu hỏi đang dùng" aria-haspopup="listbox" aria-expanded="false" aria-controls="question-set-picker-menu">Chọn bộ câu hỏi</button>
+            <div class="question-set-picker-menu" id="question-set-picker-menu" data-role="question-set-picker-menu" role="listbox" aria-label="Bộ câu hỏi đang dùng" hidden></div>
+          </div>
+          <div class="question-set-actions"><button class="primary-button" type="button" data-action="open-question-set-editor">Tạo bộ mới</button></div>
+        </div>
+        <ul class="question-set-list" data-role="question-set-list"></ul>
+      </section>
+
+      <div class="question-set-modal" data-role="question-set-modal" hidden>
+        <div class="question-set-modal-backdrop" data-action="close-question-set-editor"></div>
+        <section class="question-set-dialog" role="dialog" aria-modal="true" aria-labelledby="question-set-dialog-title">
+          <header class="question-set-dialog-header">
+            <div><p class="eyebrow">QUESTION SET</p><h2 id="question-set-dialog-title"><input class="question-set-title-input" form="question-set-editor-form" name="questionSetName" maxlength="80" placeholder="Tên bộ câu hỏi" required aria-label="Tên bộ câu hỏi"></h2><p class="muted">Mỗi bộ cần đúng 20 câu. Bạn có thể nhập từng câu hoặc nạp file Excel.</p></div>
+            <button class="secondary-button" type="button" data-action="close-question-set-editor">Đóng</button>
+          </header>
+          <form id="question-set-editor-form" class="question-set-editor-form" data-role="question-set-editor-form">
+            <div class="question-set-import-row">
+              <div><strong>Nhập từ Excel</strong><p class="hint">Cột cần có: Câu hỏi, A, B, C, D, Đáp án đúng, Giải thích. Có thể thêm cột ID.</p></div>
+              <div class="form-actions"><input data-role="question-set-file" type="file" accept=".xlsx,.csv,.tsv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/csv,text/tab-separated-values" hidden><button class="secondary-button" type="button" data-action="import-question-set">Chọn file Excel</button><a class="secondary-button question-set-template-link" href="/presentation/admin/question-set-template.xlsx" download="question-set-template.xlsx">Tải template</a><button class="secondary-button" type="button" data-action="add-question">Thêm câu mới</button></div>
+            </div>
+            <p class="question-set-editor-status" data-role="question-set-editor-status" role="status" aria-live="polite"></p>
+            <div class="question-editor-list" data-role="question-editor-list"></div>
+            <footer class="question-set-dialog-footer"><span class="question-set-count" data-role="question-set-count">0/20 câu</span><div class="form-actions"><button class="secondary-button" type="button" data-action="close-question-set-editor">Hủy</button><button class="primary-button" type="submit">Lưu bộ câu hỏi</button></div></footer>
+          </form>
+        </section>
+      </div>
+
+      <section class="info-grid">
+        <div><span class="info-label">Reference</span><strong data-role="reference-state">—</strong></div>
+        <div><span class="info-label">Endpoint</span><strong data-role="endpoint">127.0.0.1:8786</strong></div>
+      </section>
+    </main>
+  </body>
+</html>

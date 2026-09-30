@@ -1,0 +1,5 @@
+# Copy this file to .dev.vars for local development.
+# Dynamic quiz announcements are synthesized by the local VietVoice-TTS service.
+LOCAL_TTS_URL=http://127.0.0.1:8786/tts
+# Pages local proxy target for /admin. Keep this on loopback when using the tunnel.
+LOCAL_TTS_BASE_URL=http://127.0.0.1:8786
