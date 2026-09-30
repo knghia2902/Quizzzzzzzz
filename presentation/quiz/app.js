@@ -566,6 +566,7 @@ export function createQuizController(options = {}) {
     transport: 'disconnected',
     audioEnabled: true,
     clockOffset: 0,
+    answerCount: 0,
     answerSubmitted: false,
     answerPending: false,
     selectedOption: null,
@@ -1022,7 +1023,10 @@ export function createQuizController(options = {}) {
     if (playerAnswers) playerAnswers.hidden = !isPlayerQuestion;
     const shortcut = byRole('shortcut-help');
     if (shortcut) shortcut.hidden = !isPlayerQuestion;
-    text(byRole('answer-count'), state.role === 'host' ? `${Object.values(snapshot.answers || {}).filter(Boolean).length} đã trả lời` : '');
+    const answerCount = Number.isFinite(Number(state.answerCount))
+      ? Number(state.answerCount)
+      : Object.values(snapshot.answers || {}).filter(Boolean).length;
+    text(byRole('answer-count'), state.role === 'host' ? `${answerCount} đã trả lời` : '');
     text(byRole('answer-status'), state.answerSubmitted ? 'Đã ghi nhận câu trả lời.' : state.answerPending ? 'Đang gửi câu trả lời…' : '');
   }
 
@@ -1453,12 +1457,26 @@ export function createQuizController(options = {}) {
       setConnection('connected', 'Đã khôi phục phiên');
       if (!payload.snapshot) render();
     }
+    if (payload.snapshot?.partial === 'answer-progress') {
+      const currentVersion = Number(state.snapshot?.roomVersion);
+      const incomingVersion = Number(payload.snapshot.roomVersion);
+      if (Number.isFinite(currentVersion) && Number.isFinite(incomingVersion) && incomingVersion < currentVersion) return;
+      state.answerCount = Number(payload.snapshot.answerCount) || 0;
+      if (state.snapshot && Number.isFinite(incomingVersion)) state.snapshot.roomVersion = incomingVersion;
+      if (state.role === 'host') text(byRole('answer-count'), `${state.answerCount} đã trả lời`);
+      return;
+    }
     if (payload.snapshot) {
       const currentVersion = Number(state.snapshot?.roomVersion);
       const incomingVersion = Number(payload.snapshot.roomVersion);
       if (Number.isFinite(currentVersion) && Number.isFinite(incomingVersion) && incomingVersion < currentVersion) return;
       const previousPhase = state.snapshot?.phase;
       state.snapshot = payload.snapshot;
+      if (Object.prototype.hasOwnProperty.call(payload.snapshot, 'answerCount')) {
+        state.answerCount = Number(payload.snapshot.answerCount) || 0;
+      } else if (Object.prototype.hasOwnProperty.call(payload.snapshot, 'answers')) {
+        state.answerCount = Object.values(payload.snapshot.answers || {}).filter(Boolean).length;
+      }
       if (Number.isFinite(Number(payload.snapshot.roomVersion))) {
         state.session = state.session ? { ...state.session, roomVersion: Number(payload.snapshot.roomVersion) } : state.session;
         persistSession();

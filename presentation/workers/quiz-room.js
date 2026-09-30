@@ -698,7 +698,10 @@ export class QuizRoom extends DurableObject {
     this.bumpVersion();
     await this.save();
     const event = result.score > 0 ? 'correct' : 'incorrect';
-    this.broadcast({ event, snapshot: this.snapshot(), result: { ...result, accepted: true } });
+    this.broadcast({
+      event,
+      snapshot: this.snapshot({ mode: 'answer-progress' })
+    });
     if (queuedFastestVoice) {
       this.queueDynamicVoice({
         text: queuedFastestVoice.text,
@@ -1045,14 +1048,10 @@ export class QuizRoom extends DurableObject {
       .map((row, index) => ({ ...row, rank: index + 1 }));
   }
 
-  snapshot() {
+  snapshot({ mode = 'full' } = {}) {
     const now = currentTime();
     const question = this.room && this.room.questionIndex >= 0 ? this.questionAt(this.room.questionIndex) : null;
-    const currentAnswer = question ? Object.fromEntries(this.room.players.map((player) => [
-      player.playerId,
-      this.publicAnswerForPlayer(player) ? { accepted: true } : null
-    ])) : {};
-    return {
+    const base = {
       roomCode: this.room?.roomCode || null,
       roomVersion: this.room?.roomVersion || 0,
       phase: this.room?.phase || 'lobby',
@@ -1065,17 +1064,31 @@ export class QuizRoom extends DurableObject {
       remainingMs: this.room?.phase === 'question' && this.room.deadlineAt
         ? Math.max(0, this.room.deadlineAt - now)
         : this.room?.phase === 'paused_host_disconnect' ? this.room.pausedRemainingMs : null,
-      autoAdvance: this.room?.autoAdvance || false,
+      autoAdvance: this.room?.autoAdvance || false
+    };
+
+    if (mode === 'answer-progress') {
+      const answerCount = this.room?.questionIndex >= 0
+        ? Object.values(this.room.answers || {}).filter((answer) => answer?.questionIndex === this.room.questionIndex).length
+        : 0;
+      return { ...base, partial: 'answer-progress', answerCount };
+    }
+
+    const currentAnswer = question ? Object.fromEntries(this.room.players.map((player) => [
+      player.playerId,
+      this.publicAnswerForPlayer(player) ? { accepted: true } : null
+    ])) : {};
+    return {
+      ...base,
       question: question ? publicQuestion(question) : null,
       reveal: this.room?.reveal || null,
       announcement: this.room?.announcement || null,
       participants: this.room?.players?.map((player) => ({
         ...this.publicPlayer(player),
-        connectedAt: player.connectedAt,
-        disconnectedAt: player.disconnectedAt,
         answeredCurrent: Boolean(currentAnswer[player.playerId])
       })) || [],
       answers: currentAnswer,
+      answerCount: Object.values(currentAnswer).filter(Boolean).length,
       leaderboard: this.room ? this.leaderboard() : [],
       finalResults: this.room?.phase === 'finished' ? this.leaderboard().slice(0, 10) : null
     };
@@ -1282,14 +1295,15 @@ export class QuizRoom extends DurableObject {
 
   send(websocket, payload) {
     try {
-      websocket.send(JSON.stringify(payload));
+      websocket.send(typeof payload === 'string' ? payload : JSON.stringify(payload));
     } catch {
       // The close handler owns offline state; a stale socket cannot break the room actor.
     }
   }
 
   broadcast(payload) {
-    for (const websocket of this.sessions.keys()) this.send(websocket, payload);
+    const serialized = JSON.stringify(payload);
+    for (const websocket of this.sessions.keys()) this.send(websocket, serialized);
   }
 
   async webSocketClose(websocket) {
