@@ -81,7 +81,6 @@ Audio cố định, nhạc nền và SFX được khai báo trong [`presentation
 Voice động được tạo một lần ở Durable Object rồi lưu theo phòng để tất cả người chơi dùng chung audio:
 
 - Khi mở đáp án: `Chúc mừng {tên} đã trả lời đúng và nhanh nhất!`
-- Chỉ tạo khi có người trả lời đúng nhanh nhất; không tạo voice đọc danh sách top 10 khi kết thúc.
 - Phần kết thúc ván dùng audio tĩnh, còn credit ElevenLabs không bị gọi cho bảng xếp hạng.
 
 Service hỗ trợ hai engine clone giọng, chọn tại `https://quiz.natime.vn/admin`:
