@@ -1,5 +1,5 @@
 export async function onRequest(context) {
-  const assetUrl = new URL('/presentation/admin/index.html', context.request.url);
+  const assetUrl = new URL('/presentation/admin/', context.request.url);
   const asset = await context.env.ASSETS.fetch(new Request(assetUrl, {
     method: 'GET',
     headers: { Accept: 'text/html' },

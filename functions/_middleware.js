@@ -4,7 +4,7 @@ const ADMIN_AUTH_PATHS = new Set(['/api/admin/login', '/api/admin/logout']);
 const PASSWORD_CHANGE_PATH = '/api/admin/change-password';
 
 async function loginPage(context) {
-  const loginUrl = new URL('/presentation/admin-login/index.html', context.request.url);
+  const loginUrl = new URL('/presentation/admin-login/', context.request.url);
   const response = await context.env.ASSETS.fetch(new Request(loginUrl, context.request));
   const headers = new Headers(response.headers);
   headers.set('content-type', 'text/html; charset=UTF-8');
@@ -46,7 +46,7 @@ export async function onRequest(context) {
   }
 
   if (url.pathname === '/admin' || url.pathname === '/admin/') {
-    const adminUrl = new URL('/presentation/admin/index.html', url);
+    const adminUrl = new URL('/presentation/admin/', url);
     const adminResponse = await context.env.ASSETS.fetch(new Request(adminUrl, context.request));
     if (!adminResponse.ok) return adminResponse;
 
